@@ -276,7 +276,7 @@ def voice():
         tts.save(audio_path)
         
         if os.path.exists(audio_path):
-            return jsonify({"audio_url": url_for("static", filename=f"audio/{audio_file}")})
+            return jsonify({"audio_url": url_for("serve_audio", filename=audio_file)})
         else:
             raise Exception("File was not saved.")
 

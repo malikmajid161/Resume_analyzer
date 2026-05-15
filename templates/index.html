@@ -93,6 +93,28 @@
   </div>
 </div>
 
+<div id="builder" class="section-title fade-up" style="margin-top: 120px">
+  <div class="hero-badge" style="background: var(--accent-glow); color: var(--accent); margin: 0 auto 16px;">Coming Soon: Live Editing</div>
+  <h2>Professional Resume Builder</h2>
+  <p>Craft a job-winning resume in minutes with our AI-powered template suite.</p>
+</div>
+
+<div class="card fade-up" style="max-width: 1000px; margin: 0 auto; padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center;">
+  <div>
+    <h3 style="font-size: 1.75rem; margin-bottom: 20px;">Stand out with premium, ATS-ready templates.</h3>
+    <ul class="bullet-list green" style="margin-bottom: 32px;">
+      <li style="color: var(--text)">5+ Professionally designed layouts</li>
+      <li style="color: var(--text)">Instant PDF downloads</li>
+      <li style="color: var(--text)">Custom accent colors & branding</li>
+      <li style="color: var(--text)">AI-powered content suggestions</li>
+    </ul>
+    <a href="{{ url_for('builder') }}" class="btn btn-primary">Try Resume Builder</a>
+  </div>
+  <div style="background: var(--surface-2); border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow-md);">
+     <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=800" alt="Resume Template" style="width: 100%; display: block;">
+  </div>
+</div>
+
 <!-- ── Comparison Section ───────────────────── -->
 <div id="comparisons" class="section-title fade-up" style="margin-top: 120px">
   <h2>Why Choose ResumeAI?</h2>
@@ -225,6 +247,8 @@
   const resumeInput   = document.getElementById('resumeInput');
   const uploadSuccess = document.getElementById('uploadSuccess');
 
+  const btnText = document.getElementById('btnText');
+
   function setMode(mode) {
     if (mode === 'single') {
       analyzerTitle.textContent = "Single Resume Analysis";
@@ -232,6 +256,7 @@
       step1Title.textContent   = "Step 1 — Upload Resume";
       dropZoneText.textContent = "Drop your resume here";
       dropZoneSub.textContent  = "Select one PDF or DOCX file";
+      btnText.textContent      = "⚡ Run Analysis";
       resumeInput.removeAttribute('multiple');
     } else {
       analyzerTitle.textContent = "Batch Resume Comparison";
@@ -239,6 +264,7 @@
       step1Title.textContent   = "Step 1 — Upload Multiple Resumes";
       dropZoneText.textContent = "Drop your resumes here";
       dropZoneSub.textContent  = "You can select up to 5 resumes for comparison";
+      btnText.textContent      = "⚡ Run Batch Analysis";
       resumeInput.setAttribute('multiple', 'true');
     }
   }

@@ -84,21 +84,24 @@ nav {
 }
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 24px;
   align-items: center;
+  margin-left: 40px;
+  flex: 1;
 }
 .nav-link {
   text-decoration: none;
   color: var(--text);
   font-weight: 500;
-  font-size: 0.95rem;
-  transition: color 0.2s;
+  font-size: 0.9rem;
+  transition: all 0.2s;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  white-space: nowrap;
 }
-.nav-link:hover { color: var(--accent); }
-.nav-link.active { color: var(--accent); font-weight: 600; }
+.nav-link:hover { color: var(--accent); transform: translateY(-1px); }
+.nav-link.active { color: var(--accent); font-weight: 700; border-bottom: 2px solid var(--accent); padding-bottom: 4px; }
 
 .nav-logo {
   display: flex;
@@ -109,6 +112,7 @@ nav {
   color: var(--text);
   text-decoration: none;
   letter-spacing: -0.04em;
+  margin-right: 24px;
 }
 .nav-logo-icon {
   width: 36px;
@@ -558,8 +562,8 @@ nav {
 }
 .batch-item.active { 
   background: var(--surface);
-  border-left: 6px solid var(--accent);
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  border-left: 4px solid var(--accent);
+  box-shadow: inset 4px 0 0 var(--accent);
 }
 
 .batch-item-info { flex: 1; }
@@ -682,6 +686,21 @@ label {
 .btn-outline:hover {
   background: var(--surface-2);
   border-color: var(--muted);
+}
+
+.btn-sm {
+  padding: 8px 20px;
+  font-size: 0.8rem;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-actions .btn {
+  white-space: nowrap;
 }
 
 /* ── Loading Overlay ───────────────────────── */
