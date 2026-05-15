@@ -26,14 +26,10 @@
         <a href="{{ url_for('index', mode='single') }}#analyzer" class="nav-link {{ 'active' if request.args.get('mode') == 'single' }}">Single Analysis</a>
         <a href="{{ url_for('index', mode='batch') }}#analyzer" class="nav-link {{ 'active' if request.args.get('mode') == 'batch' }}">Batch Comparison</a>
         <a href="{{ url_for('index') }}#features" class="nav-link">Features</a>
-        {% if session.get('analysis') %}
-          <a href="{{ url_for('results') }}" class="nav-link {{ 'active' if request.endpoint == 'results' }}">Results</a>
-          <a href="{{ url_for('optimize') }}" class="nav-link {{ 'active' if request.endpoint == 'optimize' }}">Optimizer</a>
-          <a href="{{ url_for('interview') }}" class="nav-link {{ 'active' if request.endpoint == 'interview' }}">Interview Prep</a>
-          <a href="{{ url_for('builder') }}" class="nav-link {{ 'active' if request.endpoint == 'builder' }}">Resume Builder</a>
-        {% else %}
-          <a href="{{ url_for('builder') }}" class="nav-link {{ 'active' if request.endpoint == 'builder' }}">Resume Builder</a>
-        {% endif %}
+        <a href="{{ url_for('results') }}" class="nav-link {{ 'active' if request.endpoint == 'results' }}">Results</a>
+        <a href="{{ url_for('optimize') }}" class="nav-link {{ 'active' if request.endpoint == 'optimize' }}">Optimizer</a>
+        <a href="{{ url_for('interview') }}" class="nav-link {{ 'active' if request.endpoint == 'interview' }}">Interview Prep</a>
+        <a href="{{ url_for('builder') }}" class="nav-link {{ 'active' if request.endpoint == 'builder' }}">Resume Builder</a>
       </div>
 
       <div class="nav-actions">
