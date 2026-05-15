@@ -154,6 +154,14 @@ def results():
 
 
 # ──────────────────────────────────────────────
+#  Route — Resume Builder (GET /builder)
+# ──────────────────────────────────────────────
+
+@app.route("/builder")
+def builder():
+    return render_template("builder.html")
+
+# ──────────────────────────────────────────────
 #  Route 4 — Interview Questions  (GET /interview)
 # ──────────────────────────────────────────────
 

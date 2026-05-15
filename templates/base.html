@@ -30,6 +30,9 @@
           <a href="{{ url_for('results') }}" class="nav-link {{ 'active' if request.endpoint == 'results' }}">Results</a>
           <a href="{{ url_for('optimize') }}" class="nav-link {{ 'active' if request.endpoint == 'optimize' }}">Optimizer</a>
           <a href="{{ url_for('interview') }}" class="nav-link {{ 'active' if request.endpoint == 'interview' }}">Interview Prep</a>
+          <a href="{{ url_for('builder') }}" class="nav-link {{ 'active' if request.endpoint == 'builder' }}">Resume Builder</a>
+        {% else %}
+          <a href="{{ url_for('builder') }}" class="nav-link {{ 'active' if request.endpoint == 'builder' }}">Resume Builder</a>
         {% endif %}
       </div>
 
