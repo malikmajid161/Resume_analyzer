@@ -58,21 +58,26 @@ def generate_resume_pdf(data: dict) -> bytes:
         story.append(Spacer(1, 0.4*cm))
 
     # ── Work Experience ──────────────────────────
-    if data.get('experience'):
+    experience = data.get('experience', [])
+    if experience:
         story.append(Paragraph("Experience", section_title_style))
-        for exp in data['experience']:
+        for exp in experience:
+            if not exp.get('title') and not exp.get('company'): continue
             exp_header = Paragraph(f"<b>{exp.get('title', 'Job Title')}</b>", styles["Normal"])
             exp_sub = Paragraph(f"<font color='#64748b'><i>{exp.get('company', 'Company')}  |  {exp.get('date', '')}</i></font>", styles["Normal"])
             story.append(exp_header)
             story.append(exp_sub)
-            if exp.get('description'):
-                story.append(Paragraph(exp['description'].replace('\n', '<br/>'), styles["Normal"]))
+            desc = exp.get('description', '')
+            if desc:
+                story.append(Paragraph(desc.replace('\n', '<br/>'), styles["Normal"]))
             story.append(Spacer(1, 0.3*cm))
 
     # ── Education ───────────────────────────────
-    if data.get('education'):
+    education = data.get('education', [])
+    if education:
         story.append(Paragraph("Education", section_title_style))
-        for edu in data['education']:
+        for edu in education:
+            if not edu.get('degree') and not edu.get('school'): continue
             edu_item = Paragraph(f"<b>{edu.get('degree', 'Degree')}</b>", styles["Normal"])
             edu_sub = Paragraph(f"<font color='#64748b'>{edu.get('school', 'University')}</font>", styles["Normal"])
             story.append(edu_item)

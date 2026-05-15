@@ -153,6 +153,10 @@ def results():
     )
 
 
+@app.route("/audio/<filename>")
+def serve_audio(filename):
+    return send_from_directory("/tmp", filename)
+
 # ──────────────────────────────────────────────
 #  Route — Resume Builder (GET /builder)
 # ──────────────────────────────────────────────
@@ -255,8 +259,8 @@ def voice():
         import time
         import glob
         
-        audio_dir  = os.path.join(app.root_path, "static", "audio")
-        os.makedirs(audio_dir, exist_ok=True)
+        audio_dir  = "/tmp"
+        # os.makedirs(audio_dir, exist_ok=True)
         
         # Cleanup old files (older than 10 mins) to save space
         current_time = time.time()

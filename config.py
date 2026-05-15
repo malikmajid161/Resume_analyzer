@@ -21,7 +21,7 @@ class Config:
     MAX_FILE_SIZE_MB   = 5
     MAX_CONTENT_LENGTH = MAX_FILE_SIZE_MB * 1024 * 1024
     ALLOWED_EXTENSIONS = {"pdf", "docx"}
-    UPLOAD_FOLDER      = os.path.join(os.path.dirname(__file__), "uploads")
+    UPLOAD_FOLDER      = "/tmp/uploads"
 
     # --- Scoring Weights ---
     AI_SCORE_WEIGHT      = 0.60
