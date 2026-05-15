@@ -312,7 +312,6 @@ def report():
         return redirect(url_for("index"))
 
     try:
-        import io
         pdf_bytes = generate_pdf_report(analysis, scoring, ats_checks)
         return send_file(
             io.BytesIO(pdf_bytes),
