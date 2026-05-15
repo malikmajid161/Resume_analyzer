@@ -1,0 +1,323 @@
+{% extends "base.html" %}
+{% block title %}Upload Resume{% endblock %}
+
+{% block content %}
+<div class="landing-hero fade-up">
+  <div class="hero-badge" style="margin-bottom: 24px">✦ The Future of Career Growth</div>
+  <h1>Land your dream job with <br><span>Precision & Speed.</span></h1>
+  <p>Connect your profile with top opportunities using instant AI resume analysis, skill gap discovery, and professional optimization.</p>
+</div>
+
+<!-- ── Action Bar (Search Style) ────────────── -->
+<div class="action-bar-wrapper fade-up">
+  <div class="action-bar">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--muted); margin-right: 12px"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+    <input type="text" placeholder="Which role are you targeting today?" id="targetRole">
+    <a href="#analyzer" class="btn btn-primary">Start Analysis</a>
+  </div>
+  
+  <div style="display: flex; justify-content: center; gap: 24px; margin-top: 24px;">
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--muted); font-weight: 500;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      ATS OPTIMIZED
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--muted); font-weight: 500;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      INSTANT AI SCORING
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--muted); font-weight: 500;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--accent)"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      SKILL GAP ANALYSIS
+    </div>
+  </div>
+</div>
+
+<!-- ── Mode Selection ────────────────────────── -->
+<div class="mode-selector fade-up">
+  <a href="/?mode=single#analyzer" onclick="setMode('single')" class="mode-card">
+    <div class="icon-box">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+    </div>
+    <h3>Single Analysis</h3>
+    <p>Upload a single resume to get a deep-dive match score and interview questions.</p>
+    <div class="btn-small">Select Mode</div>
+  </a>
+  
+  <a href="/?mode=batch#analyzer" onclick="setMode('batch')" class="mode-card">
+    <div class="icon-box">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
+    </div>
+    <h3>Batch Comparison</h3>
+    <p>Upload multiple resumes (up to 5) to rank candidates for a specific job.</p>
+    <div class="btn-small">Select Mode</div>
+  </a>
+</div>
+
+<!-- ── Features Section ──────────────────────── -->
+<div id="features" class="section-title fade-up" style="margin-top: 120px">
+  <h2>Powerful AI Features</h2>
+  <p>Everything you need to beat the ATS and land your next role.</p>
+</div>
+
+<div class="feature-grid fade-up">
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+    </div>
+    <h3>Semantic Analysis</h3>
+    <p>Go beyond keywords. Our AI understands the context and complexity of your professional experience.</p>
+  </div>
+  
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+    </div>
+    <h3>AI Optimization</h3>
+    <p>Get real-time suggestions to rewrite your summary and inject high-impact keywords for any role.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
+    </div>
+    <h3>Batch Analytics</h3>
+    <p>Compare up to 5 resumes simultaneously to find the perfect version for your target application.</p>
+  </div>
+
+  <div class="feature-card">
+    <div class="feature-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    </div>
+    <h3>Interview Mastery</h3>
+    <p>Practice with 50+ FAANG-level questions and expert answers tailored to your profile.</p>
+  </div>
+</div>
+
+<!-- ── Comparison Section ───────────────────── -->
+<div id="comparisons" class="section-title fade-up" style="margin-top: 120px">
+  <h2>Why Choose ResumeAI?</h2>
+  <p>How we outperform traditional ATS tools and simple analyzers.</p>
+</div>
+
+<div class="card fade-up" style="max-width: 1000px; margin: 0 auto; overflow: hidden; padding: 0;">
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Standard ATS</th>
+        <th class="highlight">ResumeAI</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Scoring Logic</td>
+        <td>Basic Keyword Matching</td>
+        <td class="highlight">Advanced AI Semantic Scoring</td>
+      </tr>
+      <tr>
+        <td>Skill Gap Discovery</td>
+        <td>Manual Tracking</td>
+        <td class="highlight">Automated Gap Discovery</td>
+      </tr>
+      <tr>
+        <td>Interview Practice</td>
+        <td>Not Available</td>
+        <td class="highlight">50+ FAANG-Level Questions</td>
+      </tr>
+      <tr>
+        <td>Optimization</td>
+        <td>Generic Advice</td>
+        <td class="highlight">Real-time Keyword Injection</td>
+      </tr>
+      <tr>
+        <td>Batch Analysis</td>
+        <td>One by One</td>
+        <td class="highlight">Instant Comparison (Up to 5)</td>
+      </tr>
+      <tr>
+        <td>Voice Feedback</td>
+        <td>None</td>
+        <td class="highlight">AI Career Coach Voice Summary</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="analyzer" class="section-title fade-up" style="padding-top: 80px">
+  <h2 id="analyzerTitle">Analyze Your Resume</h2>
+  <p id="analyzerDesc">Upload your file to begin the analysis.</p>
+</div>
+
+<div class="analyzer-container">
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-steps">
+      <p id="loadingMsg">Extracting resume text…</p>
+      <small>This may take 5–10 seconds</small>
+    </div>
+  </div>
+
+  <form method="POST" action="{{ url_for('analyze') }}" enctype="multipart/form-data" id="uploadForm">
+
+    <div class="card fade-up fade-up-1">
+      <div class="card-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-up"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="M12 12v6"/><path d="m15 15-3-3-3 3"/></svg>
+        <span id="step1Title">Step 1 — Upload Multiple Resumes</span>
+      </div>
+
+      <div class="upload-zone" id="dropZone">
+        <span class="icon" style="font-size: 2rem; margin-bottom: 8px">📂</span>
+        <strong id="dropZoneText">Drop your resumes here</strong>
+        <p id="dropZoneSub">You can select up to 5 resumes for comparison</p>
+        <input type="file" name="resume" id="resumeInput" accept=".pdf,.docx" required multiple />
+      </div>
+      
+      <div id="uploadSuccess" class="fade-up" style="display:none; margin-top: 16px; padding: 12px 20px; background: #ecfdf5; border: 1px solid #10b981; border-radius: 12px; color: #065f46; align-items: center; gap: 12px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <div style="flex: 1">
+          <div style="font-weight: 700; font-size: 0.9rem">Upload Successful!</div>
+          <div id="fileName" style="font-size: 0.8rem; opacity: 0.8"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card fade-up fade-up-2">
+      <div class="card-title">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-quote"><path d="M17 6H3"/><path d="M21 12H3"/><path d="M21 18H3"/><path d="M15 12a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2Z"/></svg>
+        Step 2 — Job Description
+      </div>
+      <label for="job_description">Copy the full job description from the posting</label>
+      <textarea
+        name="job_description"
+        id="job_description"
+        placeholder="Paste the complete job description here — the more detail, the better the analysis…"
+        required
+        minlength="50"
+      ></textarea>
+    </div>
+
+    <div class="fade-up fade-up-3" style="text-align: center; margin-top: 32px">
+      <button type="submit" class="btn btn-primary" id="submitBtn" style="width: auto; padding: 16px 48px">
+        <span id="btnText">⚡ Run Batch Analysis</span>
+      </button>
+    </div>
+
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const dropZone   = document.getElementById('dropZone');
+  const fileInput  = document.getElementById('resumeInput');
+  const fileSelected = document.getElementById('fileSelected');
+  const fileName   = document.getElementById('fileName');
+  const form       = document.getElementById('uploadForm');
+  const submitBtn  = document.getElementById('submitBtn');
+  const overlay    = document.getElementById('loadingOverlay');
+  const loadingMsg = document.getElementById('loadingMsg');
+  const analyzerTitle = document.getElementById('analyzerTitle');
+  const analyzerDesc  = document.getElementById('analyzerDesc');
+  const step1Title    = document.getElementById('step1Title');
+  const dropZoneText  = document.getElementById('dropZoneText');
+  const dropZoneSub   = document.getElementById('dropZoneSub');
+  const resumeInput   = document.getElementById('resumeInput');
+  const uploadSuccess = document.getElementById('uploadSuccess');
+
+  function setMode(mode) {
+    if (mode === 'single') {
+      analyzerTitle.textContent = "Single Resume Analysis";
+      analyzerDesc.textContent = "Upload a single file to get detailed feedback.";
+      step1Title.textContent   = "Step 1 — Upload Resume";
+      dropZoneText.textContent = "Drop your resume here";
+      dropZoneSub.textContent  = "Select one PDF or DOCX file";
+      resumeInput.removeAttribute('multiple');
+    } else {
+      analyzerTitle.textContent = "Batch Resume Comparison";
+      analyzerDesc.textContent = "Select up to 5 resumes to rank them against the job.";
+      step1Title.textContent   = "Step 1 — Upload Multiple Resumes";
+      dropZoneText.textContent = "Drop your resumes here";
+      dropZoneSub.textContent  = "You can select up to 5 resumes for comparison";
+      resumeInput.setAttribute('multiple', 'true');
+    }
+  }
+
+  // Handle mode from URL if present
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.get('mode')) setMode(urlParams.get('mode'));
+
+  // The file input covers the entire dropZone, so no manual click listener is needed.
+
+  function showFile(file) {
+    const files = file instanceof FileList ? Array.from(file) : (Array.isArray(file) ? file : [file]);
+    
+    if (files.length === 0) return;
+
+    let names = [];
+    let valid = true;
+
+    for (const f of files) {
+      const ext = f.name.split('.').pop().toLowerCase();
+      if (!['pdf','docx'].includes(ext)) {
+        alert(`File ${f.name} is not a PDF or DOCX.`);
+        valid = false;
+        break;
+      }
+      if (f.size > 5 * 1024 * 1024) {
+        alert(`File ${f.name} is too large (max 5 MB).`);
+        valid = false;
+        break;
+      }
+      names.push(f.name);
+    }
+
+    if (valid) {
+      if (names.length === 1) {
+        fileName.textContent = names[0];
+      } else {
+        fileName.textContent = `${names.length} resumes selected`;
+      }
+      uploadSuccess.style.display = 'flex';
+      dropZone.style.borderColor = 'var(--green)';
+    }
+  }
+
+  // File selected via picker
+  fileInput.addEventListener('change', () => {
+    showFile(fileInput.files);
+  });
+
+  // Drag & drop
+  dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+  dropZone.addEventListener('dragleave',  () => dropZone.classList.remove('dragover'));
+  dropZone.addEventListener('drop', e => {
+    e.preventDefault();
+    dropZone.classList.remove('dragover');
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      fileInput.files = files;
+      showFile(files);
+    }
+  });
+
+  // Submit with loading state
+  const loadingMessages = [
+    'Extracting resume text…',
+    'Consulting Advanced AI…',
+    'Running ATS checks…',
+    'Building your report…',
+  ];
+  let msgIndex = 0;
+
+  form.addEventListener('submit', e => {
+    submitBtn.disabled = true;
+    overlay.classList.add('active');
+
+    const interval = setInterval(() => {
+      msgIndex = (msgIndex + 1) % loadingMessages.length;
+      loadingMsg.textContent = loadingMessages[msgIndex];
+    }, 2200);
+  });
+</script>
+{% endblock %}

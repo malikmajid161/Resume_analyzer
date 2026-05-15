@@ -1,0 +1,7 @@
+.env
+uploads/
+static/audio/*.mp3
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/

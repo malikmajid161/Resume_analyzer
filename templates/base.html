@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Resume Analyzer{% endblock %} — AI Powered</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+  <nav>
+    <div class="nav-content">
+      <a href="{{ url_for('index') }}" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+        </div>
+        resume<span>AI</span>
+      </a>
+      
+      <div class="nav-links">
+        <a href="{{ url_for('index') }}" class="nav-link {{ 'active' if request.endpoint == 'index' and not request.args.get('mode') }}">Home</a>
+        <a href="{{ url_for('index', mode='single') }}#analyzer" class="nav-link {{ 'active' if request.args.get('mode') == 'single' }}">Single Analysis</a>
+        <a href="{{ url_for('index', mode='batch') }}#analyzer" class="nav-link {{ 'active' if request.args.get('mode') == 'batch' }}">Batch Comparison</a>
+        <a href="{{ url_for('index') }}#features" class="nav-link">Features</a>
+        {% if session.get('analysis') %}
+          <a href="{{ url_for('results') }}" class="nav-link {{ 'active' if request.endpoint == 'results' }}">Results</a>
+          <a href="{{ url_for('optimize') }}" class="nav-link {{ 'active' if request.endpoint == 'optimize' }}">Optimizer</a>
+          <a href="{{ url_for('interview') }}" class="nav-link {{ 'active' if request.endpoint == 'interview' }}">Interview Prep</a>
+        {% endif %}
+      </div>
+
+      <div class="nav-actions">
+        {% if request.endpoint == 'results' %}
+          <a href="{{ url_for('index') }}" class="btn btn-outline btn-sm">
+            New Analysis
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="flash-messages">
+          {% for category, message in messages %}
+            <div class="flash {{ category }}">
+              {{ '⚠' if category == 'error' else '✓' }} {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+  {% block scripts %}{% endblock %}
+</body>
+</html>
