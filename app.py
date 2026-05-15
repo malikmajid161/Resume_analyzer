@@ -161,6 +161,19 @@ def results():
 def builder():
     return render_template("builder.html")
 
+@app.route("/builder/download", methods=["POST"])
+def builder_download():
+    data = request.json
+    from modules.builder_report import generate_resume_pdf
+    pdf_bytes = generate_resume_pdf(data)
+    
+    return send_file(
+        io.BytesIO(pdf_bytes),
+        mimetype="application/pdf",
+        as_attachment=True,
+        download_name=f"{data.get('fullName', 'Resume')}.pdf"
+    )
+
 # ──────────────────────────────────────────────
 #  Route 4 — Interview Questions  (GET /interview)
 # ──────────────────────────────────────────────

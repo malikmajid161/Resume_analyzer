@@ -8,7 +8,7 @@
   <p>Fill in your details and watch your resume come to life in real-time.</p>
 </div>
 
-<div class="template-selector fade-up" style="margin-bottom: 40px; display: flex; gap: 20px; justify-content: center;">
+<div class="template-selector fade-up" style="margin-bottom: 40px; display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
   <div class="template-card active" data-template="modern" onclick="setTemplate('modern')">
     <div class="template-preview-thumb modern"></div>
     <span>Modern ATS</span>
@@ -20,6 +20,14 @@
   <div class="template-card" data-template="executive" onclick="setTemplate('executive')">
     <div class="template-preview-thumb executive"></div>
     <span>Executive Suite</span>
+  </div>
+  <div class="template-card" data-template="midnight" onclick="setTemplate('midnight')">
+    <div class="template-preview-thumb midnight"></div>
+    <span>Midnight Dark</span>
+  </div>
+  <div class="template-card" data-template="bento" onclick="setTemplate('bento')">
+    <div class="template-preview-thumb bento"></div>
+    <span>Bento Grid</span>
   </div>
 </div>
 
@@ -157,6 +165,8 @@
 .template-preview-thumb.modern { background: linear-gradient(to bottom, #333 10%, #eee 10%); }
 .template-preview-thumb.creative { background: linear-gradient(to right, #4f46e5 30%, #eee 30%); }
 .template-preview-thumb.executive { background: radial-gradient(circle at center, #333 20%, #eee 20%); }
+.template-preview-thumb.midnight { background: #1e293b; border: 2px solid #4f46e5; }
+.template-preview-thumb.bento { background: repeating-linear-gradient(45deg, #eee, #eee 10px, #ddd 10px, #ddd 20px); }
 .template-card span { font-size: 0.75rem; font-weight: 700; color: var(--text); }
 
 /* ── Color Selector ────────────────────────── */
@@ -186,6 +196,33 @@
 .template-creative .main-content {
   padding: 40px;
 }
+
+.resume-preview.template-midnight {
+  background: #0f172a;
+  color: #f8fafc !important;
+}
+.template-midnight .preview-header h1 { color: var(--accent) !important; }
+.template-midnight .preview-section-title { color: var(--accent) !important; border-bottom-color: var(--accent); }
+.template-midnight .preview-contact { color: #94a3b8 !important; }
+.template-midnight .preview-item-header { color: #f8fafc !important; }
+.template-midnight .skill-chip { background: rgba(255,255,255,0.05) !important; border-color: var(--accent) !important; }
+
+.resume-preview.template-bento {
+  padding: 30px;
+  background: #f1f5f9;
+}
+.template-bento .bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.template-bento .bento-card {
+  background: white;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+.template-bento .full-width { grid-column: span 2; }
 .template-creative .preview-header { border: none; margin-bottom: 32px; }
 .template-creative .preview-header h1 { font-size: 1.8rem; }
 .template-creative .preview-contact { flex-direction: column; gap: 8px; }
@@ -466,6 +503,32 @@ function updatePreview() {
           </div>
         </div>
       </div>`;
+  } else if(currentTemplate === 'bento') {
+    output.innerHTML = `
+      <div class="bento-grid">
+        <div class="bento-card full-width">
+          <h1 style="font-size: 2.2rem; color: ${currentAccent}">${name}</h1>
+          <div style="font-size: 0.85rem; color: #64748b; margin-top: 8px;">
+            ${email} | ${phone} | ${linkedin}
+          </div>
+        </div>
+        <div class="bento-card full-width">
+          <h2 class="preview-section-title" style="color: ${currentAccent}">Summary</h2>
+          <p style="font-size: 0.9rem;">${summary}</p>
+        </div>
+        <div class="bento-card">
+          <h2 class="preview-section-title" style="color: ${currentAccent}">Skills</h2>
+          <div>${skillsHtml}</div>
+        </div>
+        <div class="bento-card">
+          <h2 class="preview-section-title" style="color: ${currentAccent}">Education</h2>
+          ${eduHtml}
+        </div>
+        <div class="bento-card full-width">
+          <h2 class="preview-section-title" style="color: ${currentAccent}">Experience</h2>
+          ${expHtml}
+        </div>
+      </div>`;
   } else {
     output.innerHTML = `
       <div class="preview-header" style="margin-bottom: 32px; border-bottom: 2px solid ${currentAccent}22; padding-bottom: 16px;">
@@ -533,8 +596,67 @@ async function generateAISummary() {
   }, 1000);
 }
 
-function downloadResume() {
-  alert("Generating your Professional PDF... Your download will start shortly.");
+async function downloadResume() {
+  const data = {
+    fullName: document.getElementById('fullName').value,
+    email: document.getElementById('email').value,
+    phone: document.getElementById('phone').value,
+    linkedin: document.getElementById('linkedin').value,
+    summary: document.getElementById('summary').value,
+    skills: document.getElementById('skillsInput').value,
+    accentColor: currentAccent,
+    template: currentTemplate,
+    experience: [],
+    education: []
+  };
+
+  document.querySelectorAll('.experience-entry').forEach(entry => {
+    data.experience.push({
+      title: entry.querySelector('.exp-title').value,
+      company: entry.querySelector('.exp-company').value,
+      date: entry.querySelector('.exp-date').value,
+      description: entry.querySelector('.exp-desc').value
+    });
+  });
+
+  document.querySelectorAll('.education-entry').forEach(entry => {
+    data.education.push({
+      degree: entry.querySelector('.edu-degree').value,
+      school: entry.querySelector('.edu-school').value
+    });
+  });
+
+  const btn = event.target;
+  const originalText = btn.innerText;
+  btn.innerText = "⌛ Generating PDF...";
+  btn.disabled = true;
+
+  try {
+    const response = await fetch('/builder/download', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${data.fullName || 'Resume'}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } else {
+      alert("Failed to generate PDF. Please check your inputs.");
+    }
+  } catch (err) {
+    console.error(err);
+    alert("An error occurred during download.");
+  } finally {
+    btn.innerText = originalText;
+    btn.disabled = false;
+  }
 }
 
 updatePreview();
