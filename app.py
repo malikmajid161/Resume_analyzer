@@ -60,6 +60,7 @@ def analyze():
 
     batch_results = []
 
+    last_error_msg = None
     for file in files:
         if not file:
             continue
@@ -68,7 +69,10 @@ def analyze():
         try:
             filepath, _ = safe_save(file)
             resume_text = extract_text(filepath)
+            if not resume_text or len(resume_text.strip()) < 50:
+                raise ValueError("Extracted text is too short or empty. Ensure the file is not a scanned image.")
         except ValueError as e:
+            last_error_msg = str(e)
             logger.error("File processing error for %s: %s", file.filename, e)
             continue
 
@@ -76,10 +80,11 @@ def analyze():
         try:
             analysis = analyze_resume(resume_text, jd)
         except RuntimeError as e:
+            last_error_msg = f"AI Engine error: {str(e)}"
             logger.error("Groq API error for %s: %s", file.filename, e)
             continue
 
-        # ── 4. Scoring ──────────────────────────────
+        # ... (rest of scoring logic)
         kw_score, kw_matched, kw_total = keyword_match_score(resume_text, jd)
         ats_checks = run_ats_checks(resume_text)
         scoring    = compute_final_score(analysis["ai_match_score"], kw_score, ats_checks=ats_checks)
@@ -97,6 +102,8 @@ def analyze():
         # Check if it was an API issue specifically
         if not Config.GROQ_API_KEY:
             flash("System configuration error: GROQ_API_KEY is missing. Please check deployment secrets.", "error")
+        elif last_error_msg:
+            flash(f"Analysis failed: {last_error_msg}", "error")
         else:
             flash("Failed to analyze any of the uploaded resumes. Please ensure they are text-based and try again.", "error")
         return redirect(url_for("index"))
