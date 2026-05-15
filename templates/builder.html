@@ -23,6 +23,16 @@
   </div>
 </div>
 
+<div class="color-selector fade-up" style="margin-bottom: 40px; display: flex; gap: 12px; justify-content: center; align-items: center;">
+  <span style="font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase;">Accent Color:</span>
+  <div class="color-dot active" style="background: #4f46e5;" onclick="setAccent('#4f46e5', this)"></div>
+  <div class="color-dot" style="background: #0ea5e9;" onclick="setAccent('#0ea5e9', this)"></div>
+  <div class="color-dot" style="background: #10b981;" onclick="setAccent('#10b981', this)"></div>
+  <div class="color-dot" style="background: #f43f5e;" onclick="setAccent('#f43f5e', this)"></div>
+  <div class="color-dot" style="background: #f59e0b;" onclick="setAccent('#f59e0b', this)"></div>
+  <div class="color-dot" style="background: #334155;" onclick="setAccent('#334155', this)"></div>
+</div>
+
 <div class="builder-container fade-up">
   <!-- ── Left Side: Form ──────────────────────── -->
   <div class="builder-form-wrapper">
@@ -148,6 +158,18 @@
 .template-preview-thumb.creative { background: linear-gradient(to right, #4f46e5 30%, #eee 30%); }
 .template-preview-thumb.executive { background: radial-gradient(circle at center, #333 20%, #eee 20%); }
 .template-card span { font-size: 0.75rem; font-weight: 700; color: var(--text); }
+
+/* ── Color Selector ────────────────────────── */
+.color-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid transparent;
+  transition: all 0.2s ease;
+}
+.color-dot:hover { transform: scale(1.2); }
+.color-dot.active { border-color: var(--text); box-shadow: 0 0 0 2px white inset; }
 
 /* ── Resume Layouts ────────────────────────── */
 .resume-preview.template-creative {
@@ -332,6 +354,19 @@ input[type="text"], input[type="email"], textarea {
 
 <script>
 let currentTemplate = 'modern';
+let currentAccent = '#4f46e5';
+
+function setAccent(color, el) {
+  currentAccent = color;
+  document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+  el.classList.add('active');
+  
+  // Update preview area CSS variable
+  document.getElementById('previewArea').style.setProperty('--accent', color);
+  document.getElementById('previewArea').style.setProperty('--accent-glow', color + '22');
+  
+  updatePreview();
+}
 
 function setTemplate(t) {
   currentTemplate = t;
@@ -394,7 +429,7 @@ function updatePreview() {
   const skillsArr = document.getElementById('skillsInput').value.split(',');
   let skillsHtml = '';
   skillsArr.forEach(s => {
-    if(s.trim()) skillsHtml += `<span class="skill-chip" style="font-size: 0.75rem; background: #f1f5f9; padding: 4px 10px; border-radius: 4px; margin: 0 4px 4px 0; display: inline-block; color: #475569;">${s.trim()}</span>`;
+    if(s.trim()) skillsHtml += `<span class="skill-chip" style="font-size: 0.75rem; background: ${currentAccent}11; border: 1px solid ${currentAccent}33; padding: 4px 10px; border-radius: 4px; margin: 0 4px 4px 0; display: inline-block; color: ${currentAccent}; font-weight: 600;">${s.trim()}</span>`;
   });
 
   const output = document.getElementById('templateOutput');
@@ -404,7 +439,7 @@ function updatePreview() {
       <div style="display: grid; grid-template-columns: 240px 1fr; min-height: 842px;">
         <div class="sidebar" style="background: #f8fafc; padding: 40px 30px; border-right: 1px solid #e2e8f0;">
           <div class="preview-header">
-            <h1 style="font-size: 1.8rem; margin-bottom: 16px;">${name}</h1>
+            <h1 style="font-size: 1.8rem; margin-bottom: 16px; color: ${currentAccent}">${name}</h1>
             <div class="preview-contact" style="display: flex; flex-direction: column; gap: 8px; font-size: 0.8rem; color: #64748b;">
               <span>${email}</span>
               <span>${phone}</span>
@@ -412,47 +447,47 @@ function updatePreview() {
             </div>
           </div>
           <div class="preview-section" style="margin-top: 32px;">
-            <h2 class="preview-section-title">Skills</h2>
+            <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">${currentTemplate === 'executive' ? '' : 'Skills'}</h2>
             <div style="display: flex; flex-wrap: wrap;">${skillsHtml}</div>
           </div>
         </div>
         <div class="main-content" style="padding: 40px;">
           <div class="preview-section">
-            <h2 class="preview-section-title">Professional Summary</h2>
+            <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">Professional Summary</h2>
             <p style="font-size: 0.9rem; line-height: 1.6; color: #334155;">${summary}</p>
           </div>
           <div class="preview-section">
-            <h2 class="preview-section-title">Work Experience</h2>
+            <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">Work Experience</h2>
             ${expHtml}
           </div>
           <div class="preview-section">
-            <h2 class="preview-section-title">Education</h2>
+            <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">Education</h2>
             ${eduHtml}
           </div>
         </div>
       </div>`;
   } else {
     output.innerHTML = `
-      <div class="preview-header" style="margin-bottom: 32px; border-bottom: 2px solid #f1f5f9; padding-bottom: 16px;">
-        <h1 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em;">${name}</h1>
+      <div class="preview-header" style="margin-bottom: 32px; border-bottom: 2px solid ${currentAccent}22; padding-bottom: 16px;">
+        <h1 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -0.04em; color: ${currentAccent}">${name}</h1>
         <div class="preview-contact" style="font-size: 0.85rem; color: #64748b; margin-top: 8px;">
           <span>${email}</span> | <span>${phone}</span> | <span>${linkedin}</span>
         </div>
       </div>
       <div class="preview-section">
-        <h2 class="preview-section-title">Professional Summary</h2>
+        <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">Professional Summary</h2>
         <p style="font-size: 0.9rem; line-height: 1.6; color: #334155;">${summary}</p>
       </div>
       <div class="preview-section">
-        <h2 class="preview-section-title">Experience</h2>
+        <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">Experience</h2>
         ${expHtml}
       </div>
       <div class="preview-section">
-        <h2 class="preview-section-title">Education</h2>
+        <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">Education</h2>
         ${eduHtml}
       </div>
       <div class="preview-section">
-        <h2 class="preview-section-title">Skills</h2>
+        <h2 class="preview-section-title" style="color: ${currentAccent}; border-color: ${currentAccent}33">Skills</h2>
         <div style="display: flex; flex-wrap: wrap;">${skillsHtml}</div>
       </div>`;
   }
