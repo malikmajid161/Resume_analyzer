@@ -94,7 +94,11 @@ def analyze():
         })
 
     if not batch_results:
-        flash("Failed to analyze any of the uploaded resumes.", "error")
+        # Check if it was an API issue specifically
+        if not Config.GROQ_API_KEY:
+            flash("System configuration error: GROQ_API_KEY is missing. Please check deployment secrets.", "error")
+        else:
+            flash("Failed to analyze any of the uploaded resumes. Please ensure they are text-based and try again.", "error")
         return redirect(url_for("index"))
 
     # Sort results by score (descending)

@@ -41,6 +41,10 @@ def safe_save(file_storage) -> tuple[str, str]:
         )
 
     safe_name = secure_filename(filename)
+    # Ensure folder exists just-in-time for Vercel /tmp
+    if not os.path.exists(Config.UPLOAD_FOLDER):
+        os.makedirs(Config.UPLOAD_FOLDER, exist_ok=True)
+    
     filepath   = os.path.join(Config.UPLOAD_FOLDER, safe_name)
     file_storage.save(filepath)
 
