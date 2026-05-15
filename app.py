@@ -7,6 +7,7 @@ import os
 import uuid
 import logging
 import json
+import io
 from flask import (
     Flask, request, render_template, redirect, url_for,
     session, jsonify, send_file, send_from_directory, flash
