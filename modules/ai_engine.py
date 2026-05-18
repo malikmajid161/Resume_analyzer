@@ -169,6 +169,131 @@ FALLBACK_QUESTIONS = [
         "category": "Strategic",
         "question": "How do you approach technical debt in a fast-paced development environment?",
         "answer": "I believe in balancing product delivery with code health. I advocate for allocating around 10-20% of every sprint cycle to refactoring and addressing technical debt. I track code quality metrics, document debt in a shared tracker, and prioritize refactoring of components that are frequently modified or have become bottlenecks for new features."
+    },
+    {
+        "category": "Technical",
+        "question": "Explain the differences between SQL and NoSQL databases, and when you would choose one over the other.",
+        "answer": "SQL databases are relational, table-based, and enforce strict schemas, making them ideal for complex queries, transactions, and ACID compliance (like financial systems). NoSQL databases (document, key-value, graph) are non-relational, schema-flexible, and scale horizontally effortlessly, making them excellent for unstructured data, real-time analytics, and high-throughput logging."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Describe a situation where a project scope suddenly changed. How did you adapt your workflow?",
+        "answer": "During a major feature rollout, a critical client requirement changed. I immediately organized a huddle with the product manager, broke down the new requirements into modular sub-tasks, identified which of our completed components could be reused, and adjusted our sprint board to focus on the new MVP requirements. We successfully shipped the updated feature on target without burnout."
+    },
+    {
+        "category": "Strategic",
+        "question": "How do you balance product velocity (getting features out fast) with code quality and thorough testing?",
+        "answer": "I practice 'pragmatic engineering.' I establish strict automated CI/CD pipelines that enforce unit testing and linting, ensuring a baseline code quality. For critical business paths, I write robust test coverage. For experimental features, I write modular, clean code but may defer extensive E2E tests, ensuring we move fast while maintaining a stable core architecture."
+    },
+    {
+        "category": "Technical",
+        "question": "What is a microservices architecture, and how do you handle service-to-service communication and data consistency?",
+        "answer": "Microservices break a monolithic app into independent, deployable services. For communication, I use synchronous protocols (gRPC or REST) for direct queries, and asynchronous message brokers (like RabbitMQ or Kafka) for event-driven decoupled systems. To maintain data consistency across services, I implement the Saga pattern or eventual consistency using event sourcing."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Tell me about a time you failed to meet a commitment. What did you learn and how did you handle it?",
+        "answer": "I once misestimated the integration complexity of a third-party payment system and missed our sprint milestone. As soon as I realized the delay, I flagged it to the PM, explained the technical hurdles, and proposed a partial release strategy (supporting credit cards first, PayPal later). I learned to factor in buffer time for external APIs and always run early feasibility spikes."
+    },
+    {
+        "category": "Strategic",
+        "question": "How do you mentor junior developers or team members to level up their skills and engineering practices?",
+        "answer": "I hold weekly pair-programming sessions and use code reviews as asynchronous learning opportunities rather than gates. I focus code reviews on explaining the 'why' behind architectural choices. I also encourage junior engineers to own technical tasks start-to-finish, guiding them through system design spikes to build confidence and independence."
+    },
+    {
+        "category": "Technical",
+        "question": "How does asymmetric encryption work, and how is it utilized to secure HTTPS connections in modern web traffic?",
+        "answer": "Asymmetric encryption uses a mathematically linked pair of keys: a public key for encryption and a private key for decryption. During HTTPS handshakes, the client uses the server's public key (from its SSL certificate) to securely share a randomly generated session key. Once shared, both parties switch to fast symmetric encryption using this shared session key for data transfers."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Describe a time you worked on a highly cross-functional project. How did you align different team goals?",
+        "answer": "I led the backend migration for a feature where marketing wanted tracking tags, security wanted strict data isolation, and frontend wanted low latency. I set up a joint design spec, documented the constraints openly, and reached a compromise: asynchronous tag loading through a secure backend worker. This kept the UI incredibly fast while fulfilling security and marketing goals."
+    },
+    {
+        "category": "Strategic",
+        "question": "What is your philosophy on writing automated tests (Unit, Integration, E2E), and how do you define good test coverage?",
+        "answer": "I align with the testing trophy model. Unit tests should cover complex pure functions. Integration tests should ensure business flows (like API request-to-database) work flawlessly, which is where the highest value lies. E2E tests are reserved for the 5-10 critical customer flows. To me, good coverage means testing business logic and boundary failures, rather than chasing 100% line coverage."
+    },
+    {
+        "category": "Technical",
+        "question": "What are index structures in relational databases (like B-Trees) and how do they optimize query times?",
+        "answer": "A database index is a data structure (commonly a B-Tree or Hash index) that maps a column's values to their physical storage location. Instead of performing a costly sequential table scan (O(N)), the database engine traverses the balanced B-Tree in logarithmic time (O(log N)), rapidly returning matching records and drastically decreasing query latencies."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Describe a time you noticed an inefficiency in your team's workflow. What initiative did you take to fix it?",
+        "answer": "I noticed our local development environments took hours to set up due to outdated documentation and manual database scripts. I containerized the entire backend and database stack using Docker Compose, wrote shell scripts for automatic database seed loading, and documented the process. This reduced the onboarding and setup time from half a day to a single command."
+    },
+    {
+        "category": "Strategic",
+        "question": "How do you decide between building a custom solution in-house versus integrating a third-party SaaS/Open Source library?",
+        "answer": "I ask: 'Is this our core competitive advantage?' If yes, we build it custom. If no, I evaluate open-source or SaaS. I weigh development cost, ongoing maintenance, security/compliance, vendor lock-in, and scalability. For instance, we should buy authentication (e.g. Auth0) and search engines (e.g. Algolia) so we can focus on building our core business logic."
+    },
+    {
+        "category": "Technical",
+        "question": "How does the Event Loop work in asynchronous runtimes like Node.js or Python's asyncio?",
+        "answer": "The Event Loop is a single-threaded execution model that manages asynchronous tasks. When an I/O operation (like a file read or API request) starts, the runtime delegates it to the OS kernel or thread pool and continues executing other code on the call stack. Once the I/O task completes, its callback is queued in the event queue and executed when the call stack becomes empty."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Tell me about a time you had to work with extremely vague or incomplete requirements. How did you proceed?",
+        "answer": "I was asked to build a 'reporting dashboard' with no specific metrics defined. Instead of guessing, I created wireframes and mock data representing standard metrics. I scheduled a quick demo with key stakeholders to get concrete feedback. This prototype-driven feedback cycle allowed us to nail down the exact requirements and build a highly relevant dashboard."
+    },
+    {
+        "category": "Strategic",
+        "question": "What is your approach to designing systems for optimal observability, logging, and application monitoring?",
+        "answer": "I design systems with the three pillars of observability: Metrics (for CPU/Memory and HTTP response rates), Structured Logs (using JSON logs with trace/correlation IDs to track requests across microservices), and Distributed Tracing (to analyze network and database bottlenecks). This allows teams to quickly debug issues in production using centralized platforms."
+    },
+    {
+        "category": "Technical",
+        "question": "What is the difference between horizontal and vertical scaling, and how does load balancing route traffic?",
+        "answer": "Vertical scaling means adding more power (CPU, RAM) to a single server, which is simple but has hard physical and cost limits. Horizontal scaling means adding more server instances to the pool. A load balancer acts as a reverse proxy, distributing incoming HTTP requests using algorithms like Round Robin or Least Connections across these active instances to prevent overloading."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Describe a time you had to pitch a new technical architecture to non-technical stakeholders or executives.",
+        "answer": "I pitched a rewrite of our legacy checkout flow. Instead of discussing technical terms like microservices, database normalization, or React re-renders, I focused entirely on business impacts. I explained that the new architecture would increase conversion rates by 12%, reduce cloud infrastructure costs by 20%, and speed up feature shipping times from weeks to days."
+    },
+    {
+        "category": "Strategic",
+        "question": "How do you evaluate and choose the right tech stack (frameworks, programming languages) for a brand-new product?",
+        "answer": "I prioritize team expertise, library ecosystem support, developer speed, and community longevity. I avoid adopting bleeding-edge frameworks with small support networks unless they offer massive, non-trivial competitive advantages. I choose reliable, mature technologies (like React, Python, or Go) to ensure fast hiring and stable production operations."
+    },
+    {
+        "category": "Technical",
+        "question": "Explain the concept of containerization (like Docker) and how it differs from traditional Virtual Machines (VMs).",
+        "answer": "Virtual Machines bundle a full guest OS, hypervisor, and application binaries, which are resource-heavy and slow to boot. Containers share the host OS kernel and package only the application and its dependencies. This makes containers extremely lightweight (measured in MBs), ultra-portable, and fast to boot, ensuring consistent environment parity across development and production."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Describe a conflict you had with a product manager regarding feature feasibility, and how you reached an agreement.",
+        "answer": "A PM wanted a real-time recommendation feature that would take weeks to develop. I explained the technical complexity, database load concerns, and potential release delays. We collaborated to find an MVP alternative: a static recommendation block updated nightly via a cron job. This satisfied the user engagement goal, took only a day to build, and kept our release timeline on schedule."
+    },
+    {
+        "category": "Strategic",
+        "question": "What is your approach to refactoring legacy code without introducing regressions or breaking production?",
+        "answer": "I use the 'Boy Scout Rule'—always leave the code cleaner than you found it. Before editing, I verify there is robust unit and integration test coverage. If tests are missing, I write them first to establish a safety net. I make small, incremental changes, perform thorough local testing, run automated CI checks, and release the changes gradually behind feature flags."
+    },
+    {
+        "category": "Technical",
+        "question": "How do database transactions maintain ACID properties, and what are transaction isolation levels?",
+        "answer": "ACID guarantees database reliability. Atomic means all operations in a transaction succeed or all fail. Consistency ensures data remains valid. Isolation prevents concurrent transactions from interfering. Durability ensures committed changes survive crashes. Isolation levels (Read Uncommitted, Read Committed, Repeatable Read, Serializable) control the strictness of transaction locking."
+    },
+    {
+        "category": "Behavioral",
+        "question": "Tell me about a time you received critical constructive feedback on your code. How did you react and improve?",
+        "answer": "In a major pull request, a senior engineer pointed out that my nesting structure made the code hard to read and test. Rather than getting defensive, I thanked them, sat down with them to understand the refactoring approach, and applied a pattern using early returns and flat logic. I documented this pattern for future reference and now incorporate it into all my code."
+    },
+    {
+        "category": "Strategic",
+        "question": "How do you approach cloud resource optimization and cost reduction when managing high-scale infrastructure?",
+        "answer": "I run regular audits to identify underutilized resources. I configure auto-scaling groups to dynamically spin down instances during off-peak hours. I migrate suitable workloads to serverless or container orchestration platforms, set up lifecycle policies for old data storage (archiving S3 files to Glacier), and use spot or reserved instances for predictable workloads."
+    },
+    {
+        "category": "Technical",
+        "question": "What are web sockets, and how do they differ from HTTP polling when designing real-time interactive apps?",
+        "answer": "HTTP polling repeatedly sends requests to a server at intervals to check for updates, creating massive overhead and network traffic. WebSockets establish a single, persistent, bi-directional TCP connection between the client and server. This allows real-time, low-overhead, full-duplex communication, making it ideal for chat apps, gaming, and real-time dashboard updates."
     }
 ]
 
