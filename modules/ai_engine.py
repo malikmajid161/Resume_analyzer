@@ -46,7 +46,7 @@ ANALYSIS_PROMPT_TEMPLATE = """Analyze this resume against the job description. R
 """
 
 INTERVIEW_PROMPT_TEMPLATE = """You are a world-class interviewer from a top-tier tech company (FAANG-level). 
-Generate a comprehensive set of 15 to 20 interview questions and detailed expert answers. 
+Generate a comprehensive set of 30 to 35 interview questions and detailed expert answers. 
 
 PRIORITY FOCUS (Area of Interest): {interest}
 ADDITIONAL FOCUS (Gaps): {missing_skills}
@@ -67,7 +67,7 @@ Return ONLY this JSON object:
   ]
 }}
 
-Return exactly 15 to 20 high-quality questions. Ensure they are DIFFERENT from standard common ones. Return ONLY JSON.
+Return exactly 30 to 35 high-quality questions. Ensure they are DIFFERENT from standard common ones. Return ONLY JSON.
 """
 
 
