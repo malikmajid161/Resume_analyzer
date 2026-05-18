@@ -74,7 +74,7 @@ def generate_pdf_report(analysis: dict, scoring: dict, ats_checks: list) -> byte
     
     score_data = [
         [
-            Paragraph(f'<b>{score}</b><font size="14" rise="6">/100</font>', score_style),
+            Paragraph(f'<b>{score}</b><font size="14">/100</font>', score_style),
             Paragraph(f'<b>Grade:</b> {grade}<br/>'
                       f'<b>AI Score:</b> {scoring["ai_score"]}/100<br/>'
                       f'<b>Keyword Score:</b> {scoring["keyword_score"]}/100',
@@ -110,7 +110,7 @@ def generate_pdf_report(analysis: dict, scoring: dict, ats_checks: list) -> byte
         Paragraph(f"<b><font color='#22c55e'>Found Skills</font></b><br/>{found_text}",   styles["Normal"]),
         Paragraph(f"<b><font color='#ef4444'>Missing Skills</font></b><br/>{missing_text}", styles["Normal"]),
     ]]
-    skills_table = Table(skills_data, colWidths=["50%", "50%"])
+    skills_table = Table(skills_data, colWidths=[8.5*cm, 8.5*cm])
     skills_table.setStyle(TableStyle([
         ("VALIGN",        (0, 0), (-1, -1), "TOP"),
         ("TOPPADDING",    (0, 0), (-1, -1), 8),
@@ -149,7 +149,7 @@ def generate_pdf_report(analysis: dict, scoring: dict, ats_checks: list) -> byte
             c["message"],
         ])
 
-    ats_table = Table(ats_data, colWidths=["30%", "15%", "55%"])
+    ats_table = Table(ats_data, colWidths=[5.1*cm, 2.55*cm, 9.35*cm])
     ats_table.setStyle(TableStyle([
         ("BACKGROUND",    (0, 0), (-1, 0), DARK),
         ("TEXTCOLOR",     (0, 0), (-1, 0), WHITE),

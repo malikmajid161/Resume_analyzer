@@ -30,6 +30,7 @@
         <a href="{{ url_for('optimize') }}" class="nav-link {{ 'active' if request.endpoint == 'optimize' }}">Optimizer</a>
         <a href="{{ url_for('interview') }}" class="nav-link {{ 'active' if request.endpoint == 'interview' }}">Interview Prep</a>
         <a href="{{ url_for('builder') }}" class="nav-link {{ 'active' if request.endpoint == 'builder' }}">Resume Builder</a>
+        <a href="https://malikmajid-resume-analyzer.vercel.app/" class="nav-link" target="_blank" style="color: var(--accent); font-weight: 600;">About / Live Demo</a>
       </div>
 
       <div class="nav-actions">
@@ -57,6 +58,24 @@
     {% endwith %}
 
     {% block content %}{% endblock %}
+
+    <!-- Footer -->
+    <footer style="margin-top: 80px; padding: 40px 0 20px; border-top: 1px solid var(--border); text-align: center; color: var(--muted); font-size: 0.9rem; width: 100%;">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 16px; align-items: center;">
+        <div style="font-weight: 700; color: var(--text); letter-spacing: 0.5px;">resume<span style="color: var(--accent);">AI</span> Platform</div>
+        <p style="max-width: 600px; margin: 0; line-height: 1.6; opacity: 0.8; font-size: 0.85rem;">
+          An advanced, AI-powered resume analysis and FAANG-level interview preparation platform designed to help candidates optimize their profiles and master their career goals.
+        </p>
+        <div style="display: flex; gap: 20px; margin-top: 8px; font-weight: 500; font-size: 0.85rem;">
+          <a href="https://malikmajid-resume-analyzer.vercel.app/" target="_blank" style="color: var(--accent); text-decoration: none; transition: color 0.2s;">About & Live Demo</a>
+          <span style="opacity: 0.4;">|</span>
+          <a href="https://github.com/malikmajid161/Resume_analyzer.git" target="_blank" style="color: var(--accent); text-decoration: none; transition: color 0.2s;">GitHub Repo</a>
+        </div>
+        <div style="margin-top: 16px; font-size: 0.8rem; opacity: 0.6;">
+          &copy; 2026 ResumeAI. All rights reserved.
+        </div>
+      </div>
+    </footer>
   </div>
 
   {% block scripts %}{% endblock %}
